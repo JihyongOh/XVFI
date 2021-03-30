@@ -7,4 +7,4 @@ We will provide the training and test code along with the trained weights and th
 If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/~~~).
 
 **Reference**:  
-> Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", *arxiv*, 2020. (* *equal contribution*)
+> Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", *arxiv*, 2021. (* *equal contribution*)
