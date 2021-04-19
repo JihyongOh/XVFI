@@ -1,5 +1,5 @@
 # XVFI
-**This is the official repository of XVFI (eXtreme Video Frame Interpolation).**
+**This is the official repository of XVFI (eXtreme Video Frame Interpolation), https://arxiv.org/abs/2103.16206**
 
 ## X4K1000FPS
 #### Dataset of high-resolution, high-fps video frames with extreme motion
