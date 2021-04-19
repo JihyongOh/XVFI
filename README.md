@@ -56,6 +56,7 @@ Please send me an email, flhy5836@kaist.ac.kr, jhoh94@kaist.ac.kr
 **Reference**:  
 > Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", https://arxiv.org/abs/2103.16206, 2021. (* *equal contribution*)
 > 
+**BibTeX**
 ```bibtex
 @article{sim2021xvfi,
   title={XVFI: eXtreme Video Frame Interpolation},
