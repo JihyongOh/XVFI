@@ -43,7 +43,7 @@ We provide our X4K1000FPS dataset which consists of X-TEST and X-TRAIN. Please r
        ├──── ...
 ```
 
-After downloading the files from the link, decompress the `encoded_test.tar.gz` and `encoded_train.tar.gz`. The resulting .mp4 files can be decoded into .png files via running `mp4_decoding.py`. `FFmpeg` is required to run `mp4_decoding.py`. Please follow the instruction written in `mp4_decoding.py`.
+After downloading the files from the link, decompress the `encoded_test.tar.gz` and `encoded_train.tar.gz`. The resulting .mp4 files can be decoded into .png files via running `mp4_decoding.py`. Please follow the instruction written in `mp4_decoding.py`.
 
 ## Coming Soon
 
