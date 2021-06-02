@@ -1,6 +1,36 @@
 # XVFI
 **This is the official repository of XVFI (eXtreme Video Frame Interpolation), https://arxiv.org/abs/2103.16206**
 
+
+We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
+If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
+
+
+**Reference**:  
+> Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", https://arxiv.org/abs/2103.16206, 2021. (* *equal contribution*)
+> 
+**BibTeX**
+```bibtex
+@article{sim2021xvfi,
+  title={XVFI: eXtreme Video Frame Interpolation},
+  author={Sim, Hyeonjun and Oh, Jihyong and Kim, Munchurl},
+  journal={arXiv preprint arXiv:2103.16206},
+  year={2021}
+}
+```
+
+### Requirements
+Our code is implemented using PyTorch1.7, and was tested under the following setting:  
+* Python 3.7 
+* PyTorch 1.7.1
+* CUDA 10.2  
+* cuDNN 7.6.5  
+* NVIDIA TITAN RTX GPU
+* Ubuntu 16.04 LTS
+Since there is "align_corners" option in "F.interpolate" or "nn.functional.grid_sample" in PyTorch1.7, we recommend you to follow our setting.
+Especially, do not use under PyTorch1.4, which may leads degraded performance.
+
+
 ## X4K1000FPS
 #### Dataset of high-resolution, high-fps video frames with extreme motion
 ![003](/figures/003.gif "003") ![004](/figures/004.gif "004") ![045](/figures/045.gif "045")
@@ -45,23 +75,30 @@ We provide our X4K1000FPS dataset which consists of X-TEST and X-TRAIN. Please r
 
 After downloading the files from the link, decompress the `encoded_test.tar.gz` and `encoded_train.tar.gz`. The resulting .mp4 files can be decoded into .png files via running `mp4_decoding.py`. Please follow the instruction written in `mp4_decoding.py`.
 
-## Coming Soon
 
-We will provide the training and test code along with the trained weights for XVFI. 
-If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
+
+
+## Test code (writing)
+### Quick Start for X-TEST
+1. Download the source code in a directory of your choice **\<source_path\>**.
+2. First download our X-TEST test dataset by following the above section 'X4K1000FPS'.
+3. Download the pre-trained weights from [this link](https://www.dropbox.com/s/xj2ixvay0e5ldma/XVFInet_X4K1000FPS_exp1_latest.pt?dl=0) to place in **\<source_path\>/checkpoint_dir/XVFInet_X4K1000FPS_exp1**.
+```
+XVFI
+└── checkpoint_dir
+   └── XVFInet_X4K1000FPS_exp1
+       ├── XVFInet_X4K1000FPS_exp1_latest.pt           
+```
+4. Run **main.py** with the following options in parse_args: 
+```bash
+python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --module_scale_factor 4 --S_tst 5 --multiple 8 
+```
+6. 
+
+### Quick Start for Vimeo90K
+https://www.dropbox.com/s/5v4dp81bto4x9xy/XVFInet_Vimeo_exp1_latest.pt?dl=0
 
 ## Contact
 Please send me an email, flhy5836@kaist.ac.kr, jhoh94@kaist.ac.kr
 
-**Reference**:  
-> Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", https://arxiv.org/abs/2103.16206, 2021. (* *equal contribution*)
-> 
-**BibTeX**
-```bibtex
-@article{sim2021xvfi,
-  title={XVFI: eXtreme Video Frame Interpolation},
-  author={Sim, Hyeonjun and Oh, Jihyong and Kim, Munchurl},
-  journal={arXiv preprint arXiv:2103.16206},
-  year={2021}
-}
-```
+
