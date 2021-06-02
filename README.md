@@ -1,7 +1,7 @@
 # XVFI
 **This is the official repository of XVFI (eXtreme Video Frame Interpolation), https://arxiv.org/abs/2103.16206**
 
-
+Last Update: 20210602
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
 If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
 
@@ -27,6 +27,7 @@ Our code is implemented using PyTorch1.7, and was tested under the following set
 * cuDNN 7.6.5  
 * NVIDIA TITAN RTX GPU
 * Ubuntu 16.04 LTS
+
 Since there is "align_corners" option in "F.interpolate" or "nn.functional.grid_sample" in PyTorch1.7, we recommend you to follow our setting.
 Especially, do not use under PyTorch1.4, which may leads degraded performance.
 
@@ -124,6 +125,10 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_sca
 ### Description
 * After running with the above test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_Vimeo_exp1**, then obtain the PSNR/SSIM/tOF results per each test clip as "total_metrics.csv" in the same folder.
 * There are certain code lines in front of the 'def main()' for a convenience when running with the Vimeo option.
+
+## Training code (Coming Soon)
+### Quick Start
+
 
 ## Contact
 If you have any question, please send an email to either 'flhy5836@kaist.ac.kr' or 'jhoh94@kaist.ac.kr'.
