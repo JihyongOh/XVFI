@@ -78,7 +78,7 @@ After downloading the files from the link, decompress the `encoded_test.tar.gz` 
 
 
 
-## Test code (writing)
+## Test code
 ### Quick Start for X-TEST (x8 Multi-Frame Interpolation as in Table 2)
 1. Download the source codes in a directory of your choice **\<source_path\>**.
 2. First download our X-TEST test dataset by following the above section 'X4K1000FPS'.
@@ -99,17 +99,33 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --modul
 ```
 ==> It would yield ** (PSNR/SSIM/tOF) = (28.86/0.858/2.67) **.
 ### Description
-* After running the test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_X4K1000FPS_exp1**
+* After running with the above test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_X4K1000FPS_exp1**, then obtain the PSNR/SSIM/tOF results per each test clip as "total_metrics.csv" in the same folder. 
 * Our proposed XVFI-Net can start from any downscaled input upward by regulating '--S_tst', which is adjustable in terms of
 the number of scales for inference according to the input resolutions or the motion magnitudes.
-* You can get any Multi-Frame Interpolation (xM) result by regulating '--multiple'.
+* You can get any Multi-Frame Interpolation (x M) result by regulating '--multiple'.
 
 
 
-### Quick Start for Vimeo90K
-https://www.dropbox.com/s/5v4dp81bto4x9xy/XVFInet_Vimeo_exp1_latest.pt?dl=0
+### Quick Start for Vimeo90K (as in Fig. 8)
+1. Download the source codes in a directory of your choice **\<source_path\>**.
+2. First download Vimeo90K dataset from [this link](http://toflow.csail.mit.edu/) (including 'tri_trainlist.txt') to place in **\<source_path\>/vimeo_triplet**. .
+3. Download the pre-trained weights (XVFI-Net_v), which was trained by Vimeo90K, from [this link](https://www.dropbox.com/s/5v4dp81bto4x9xy/XVFInet_Vimeo_exp1_latest.pt?dl=0) to place in **\<source_path\>/checkpoint_dir/XVFInet_Vimeo_exp1**.
+```
+XVFI
+└── checkpoint_dir
+   └── XVFInet_Vimeo_exp1
+       ├── XVFInet_Vimeo_exp1_latest.pt           
+```
+4. Run **main.py** with the following options in parse_args: 
+```bash
+python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_scale_factor 2 --S_tst 1
+```
+
+### Description
+* After running with the above test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_Vimeo_exp1**, then obtain the PSNR/SSIM/tOF results per each test clip as "total_metrics.csv" in the same folder.
+* There are certain code lines in front of the 'def main()' for a convenience when running with the Vimeo option.
 
 ## Contact
-Please send me an email, flhy5836@kaist.ac.kr, jhoh94@kaist.ac.kr
+If you have any question, please send an email to either 'flhy5836@kaist.ac.kr' or 'jhoh94@kaist.ac.kr'.
 
 
