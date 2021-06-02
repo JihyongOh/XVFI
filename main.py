@@ -16,7 +16,7 @@ def parse_args():
 	parser.add_argument('--net_type', type=str, default='XVFInet', choices=['XVFInet'], help='The type of Net')
 	parser.add_argument('--net_object', default=XVFInet, choices=[XVFInet], help='The type of Net')
 	parser.add_argument('--exp_num', type=int, default=1, help='The experiment number')
-	parser.add_argument('--phase', type=str, default='train', choices=['train', 'test', 'metrics_evaluation'])
+	parser.add_argument('--phase', type=str, default='test', choices=['train', 'test', 'metrics_evaluation'])
 	parser.add_argument('--continue_training', action='store_true', default=False, help='continue the training')
 
 	""" Information of directories """
@@ -27,17 +27,11 @@ def parse_args():
 
 	parser.add_argument('--dataset', default='X4K1000FPS', choices=['X4K1000FPS','Vimeo'], help='Training/test Dataset')
 	
-	# parser.add_argument('--train_data_path', type=str, default='./X4K1000FPS/train')
-	# parser.add_argument('--val_data_path', type=str, default='./X4K1000FPS/val')
-	# parser.add_argument('--test_data_path', type=str, default='./X4K1000FPS/test')
-
-	parser.add_argument('--train_data_path', type=str, default='../Datasets/VIC_4K_1000FPS/train')
-	parser.add_argument('--val_data_path', type=str, default='../Datasets/VIC_4K_1000FPS/val')
-	parser.add_argument('--test_data_path', type=str, default='../Datasets/VIC_4K_1000FPS/test')
+	parser.add_argument('--train_data_path', type=str, default='./X4K1000FPS/train')
+	parser.add_argument('--val_data_path', type=str, default='./X4K1000FPS/val')
+	parser.add_argument('--test_data_path', type=str, default='./X4K1000FPS/test')
 	
-
-	# parser.add_argument('--vimeo_data_path', type=str, default='./vimeo_triplet')
-	parser.add_argument('--vimeo_data_path', type=str, default='../Datasets/vimeo_triplet/')
+	parser.add_argument('--vimeo_data_path', type=str, default='./vimeo_triplet')
 
 	""" Hyperparameters for Training (when [phase=='train']) """
 	parser.add_argument('--epochs', type=int, default=200, help='The number of epochs to run')
