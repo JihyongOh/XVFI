@@ -1,5 +1,0 @@
-*place the downloaded pre-trained weights in this folder*
-
-"XVFInet_X4K1000FPS_exp1"
-or
-"XVFInet_Vimeo_exp1"
