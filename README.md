@@ -95,11 +95,12 @@ XVFI
 ```bash
 python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --module_scale_factor 4 --S_tst 5 --multiple 8 
 ```
-==> It would yield ** (PSNR/SSIM/tOF) = (30.12/0.870/2.15) **.
+==> It would yield **(PSNR/SSIM/tOF) = (30.12/0.870/2.15)**.
 ```bash
 python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --module_scale_factor 4 --S_tst 3 --multiple 8 
 ```
-==> It would yield ** (PSNR/SSIM/tOF) = (28.86/0.858/2.67) **.
+==> It would yield **(PSNR/SSIM/tOF) = (28.86/0.858/2.67)**.
+
 ### Description
 * After running with the above test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_X4K1000FPS_exp1**, then obtain the PSNR/SSIM/tOF results per each test clip as "total_metrics.csv" in the same folder. 
 * Our proposed XVFI-Net can start from any downscaled input upward by regulating '--S_tst', which is adjustable in terms of
