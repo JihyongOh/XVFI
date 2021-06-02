@@ -79,10 +79,10 @@ After downloading the files from the link, decompress the `encoded_test.tar.gz` 
 
 
 ## Test code (writing)
-### Quick Start for X-TEST
-1. Download the source code in a directory of your choice **\<source_path\>**.
+### Quick Start for X-TEST (x8 Multi-Frame Interpolation as in Table 2)
+1. Download the source codes in a directory of your choice **\<source_path\>**.
 2. First download our X-TEST test dataset by following the above section 'X4K1000FPS'.
-3. Download the pre-trained weights from [this link](https://www.dropbox.com/s/xj2ixvay0e5ldma/XVFInet_X4K1000FPS_exp1_latest.pt?dl=0) to place in **\<source_path\>/checkpoint_dir/XVFInet_X4K1000FPS_exp1**.
+3. Download the pre-trained weights, which was trained by X-TRAIN, from [this link](https://www.dropbox.com/s/xj2ixvay0e5ldma/XVFInet_X4K1000FPS_exp1_latest.pt?dl=0) to place in **\<source_path\>/checkpoint_dir/XVFInet_X4K1000FPS_exp1**.
 ```
 XVFI
 └── checkpoint_dir
@@ -93,7 +93,18 @@ XVFI
 ```bash
 python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --module_scale_factor 4 --S_tst 5 --multiple 8 
 ```
-6. 
+==> It would yield ** (PSNR/SSIM/tOF) = (30.12/0.870/2.15) **.
+```bash
+python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --module_scale_factor 4 --S_tst 3 --multiple 8 
+```
+==> It would yield ** (PSNR/SSIM/tOF) = (28.86/0.858/2.67) **.
+### Description
+* After running the test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_X4K1000FPS_exp1**
+* Our proposed XVFI-Net can start from any downscaled input upward by regulating '--S_tst', which is adjustable in terms of
+the number of scales for inference according to the input resolutions or the motion magnitudes.
+* You can get any Multi-Frame Interpolation (xM) result by regulating '--multiple'.
+
+
 
 ### Quick Start for Vimeo90K
 https://www.dropbox.com/s/5v4dp81bto4x9xy/XVFInet_Vimeo_exp1_latest.pt?dl=0
