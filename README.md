@@ -208,4 +208,4 @@ python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_fact
 If you have any question, please send an email to either flhy5836@kaist.ac.kr or jhoh94@kaist.ac.kr.
 
 ## License
-The source code is free for research and education use only. Any comercial use should get formal permission first.
+The source code is free for research and education use only. Any commercial use should get formal permission first.
