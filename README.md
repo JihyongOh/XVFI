@@ -61,8 +61,8 @@ Our code is implemented using PyTorch1.7, and was tested under the following set
 * NVIDIA TITAN RTX GPU
 * Ubuntu 16.04 LTS
 
-Caution: since there is "align_corners" option in "F.interpolate" or "nn.functional.grid_sample" in PyTorch1.7, we recommend you to follow our setting.
-Especially, do not use under PyTorch1.4, which may lead to yield a degraded performance.
+**Caution**: since there is "align_corners" option in "nn.functional.interpolate" and "nn.functional.grid_sample" in PyTorch1.7, we recommend you to follow our settings.
+Especially, if you use the other PyTorch versions, it may lead to yield a different performance.
 
 
 
