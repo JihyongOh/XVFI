@@ -111,7 +111,15 @@ the number of scales for inference according to the input resolutions or the mot
 
 ### Quick Start for Vimeo90K (as in Fig. 8)
 1. Download the source codes in a directory of your choice **\<source_path\>**.
-2. First download Vimeo90K dataset from [this link](http://toflow.csail.mit.edu/) (including 'tri_trainlist.txt') to place in **\<source_path\>/vimeo_triplet**. .
+2. First download Vimeo90K dataset from [this link](http://toflow.csail.mit.edu/) (including 'tri_trainlist.txt') to place in **\<source_path\>/vimeo_triplet**.
+```
+XVFI
+└── vimeo_triplet
+       ├──  sequences
+       readme.txt
+       tri_testlist.txt
+       tri_trainlist.txt
+```
 3. Download the pre-trained weights (XVFI-Net_v), which was trained by Vimeo90K, from [this link](https://www.dropbox.com/s/5v4dp81bto4x9xy/XVFInet_Vimeo_exp1_latest.pt?dl=0) to place in **\<source_path\>/checkpoint_dir/XVFInet_Vimeo_exp1**.
 ```
 XVFI
@@ -132,9 +140,48 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_sca
 * It should be noted that there is a typo "S_trn
 and S_tst are set to 2" in the current version of XVFI paper, which should be modified to 1 (not 2), sorry for inconvenience.
 
-## Training code (Coming Soon)
-### Quick Start
+## Training code
+### Quick Start for X-TRAIN
+1. Download the source codes in a directory of your choice **\<source_path\>**.
+2. First download our X-TRAIN train/val/test datasets by following the above section 'X4K1000FPS' and place them as belows:
+ ```
+XVFI
+└── X4K1000FPS
+       ├──  train
+           ├── 002
+           ├── ...
+           └── 172
+       ├──  val
+           ├── Type1
+           ├── Type2
+           ├── Type3
+       ├──  test
+           ├── Type1
+           ├── Type2
+           ├── Type3
 
+```
+3. Run **main.py** with the following options in parse_args:  
+```bash
+python main.py --phase 'train' --exp_num 1 --dataset 'X4K1000FPS' --S_trn 3 --S_tst 5
+```
+### Quick Start for Vimeo90K
+1. Download the source codes in a directory of your choice **\<source_path\>**.
+2. First download Vimeo90K dataset from [this link](http://toflow.csail.mit.edu/) (including 'tri_trainlist.txt') to place in **\<source_path\>/vimeo_triplet**.
+```
+XVFI
+└── vimeo_triplet
+       ├──  sequences
+       readme.txt
+       tri_testlist.txt
+       tri_trainlist.txt
+```
+3. Run **main.py** with the following options in parse_args:  
+```bash
+python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --S_trn 1 --S_tst 1
+```
+### Description
+* You can freely regulate other arguments in the parser of **main.py**.
 
 ## Contact
 If you have any question, please send an email to either flhy5836@kaist.ac.kr or jhoh94@kaist.ac.kr.
