@@ -123,16 +123,20 @@ XVFI
 ```bash
 python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_scale_factor 2 --S_tst 1
 ```
+==> It would yield **PSNR = 35.07** on Vimeo90K. 
 
 ### Description
-* After running with the above test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_Vimeo_exp1**, then obtain the PSNR/SSIM/tOF results per each test clip as "total_metrics.csv" in the same folder.
+* After running with the above test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_Vimeo_exp1**.
 * There are certain code lines in front of the 'def main()' for a convenience when running with the Vimeo option.
+* The SSIM result of 0.9760 as in Fig. 8 was measured by matlab SSIM function for a fair comparison after running the above guide because other SOTA methods did so. We also upload "compare_psnr_ssim.m" matlab file to obtain it. 
+* It should be noted that there is a typo "S_trn
+and S_tst are set to 2" in the current version of XVFI paper, which should be modified to 1 (not 2), sorry for inconvenience.
 
 ## Training code (Coming Soon)
 ### Quick Start
 
 
 ## Contact
-If you have any question, please send an email to either 'flhy5836@kaist.ac.kr' or 'jhoh94@kaist.ac.kr'.
+If you have any question, please send an email to either flhy5836@kaist.ac.kr or jhoh94@kaist.ac.kr.
 
 
