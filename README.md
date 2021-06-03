@@ -12,7 +12,7 @@ If you find this repository useful, please consider citing our [paper](https://a
 ![results_045_resized](/figures/results_045_resized_768.gif "results_045_resized")
 ![results_079_resized](/figures/results_079_resized_768.gif "results_079_resized")
 ![results_158_resized](/figures/results_158_resized_768.gif "results_158_resized")\
-The 4K 30fps input frames are interpolated to be 4K 240fps frames. All results are encoded at 30fps to be played as x8 slow motion and spatially down-scaled due to the limit of file sizes.
+The 4K@30fps input frames are interpolated to be 4K@240fps frames. All results are encoded at 30fps to be played as x8 slow motion and spatially down-scaled due to the limit of file sizes.
 
 
 ## Table of Contents
