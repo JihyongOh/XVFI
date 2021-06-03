@@ -7,32 +7,6 @@ We provide the training and test code along with the trained weights and the dat
 If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
 
 
-**Reference**:  
-> Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", https://arxiv.org/abs/2103.16206, 2021. (* *equal contribution*)
-> 
-**BibTeX**
-```bibtex
-@article{sim2021xvfi,
-  title={XVFI: eXtreme Video Frame Interpolation},
-  author={Sim, Hyeonjun and Oh, Jihyong and Kim, Munchurl},
-  journal={arXiv preprint arXiv:2103.16206},
-  year={2021}
-}
-```
-
-### Requirements
-Our code is implemented using PyTorch1.7, and was tested under the following setting:  
-* Python 3.7 
-* PyTorch 1.7.1
-* CUDA 10.2  
-* cuDNN 7.6.5  
-* NVIDIA TITAN RTX GPU
-* Ubuntu 16.04 LTS
-
-Caution: since there is "align_corners" option in "F.interpolate" or "nn.functional.grid_sample" in PyTorch1.7, we recommend you to follow our setting.
-Especially, do not use under PyTorch1.4, which may lead to yield a degraded performance.
-
-
 ## X4K1000FPS
 #### Dataset of high-resolution, high-fps video frames with extreme motion
 ![003](/figures/003.gif "003") ![004](/figures/004.gif "004") ![045](/figures/045.gif "045")
@@ -77,6 +51,18 @@ We provide our X4K1000FPS dataset which consists of X-TEST and X-TRAIN. Please r
 
 After downloading the files from the link, decompress the `encoded_test.tar.gz` and `encoded_train.tar.gz`. The resulting .mp4 files can be decoded into .png files via running `mp4_decoding.py`. Please follow the instruction written in `mp4_decoding.py`.
 
+
+### Requirements
+Our code is implemented using PyTorch1.7, and was tested under the following setting:  
+* Python 3.7 
+* PyTorch 1.7.1
+* CUDA 10.2  
+* cuDNN 7.6.5  
+* NVIDIA TITAN RTX GPU
+* Ubuntu 16.04 LTS
+
+Caution: since there is "align_corners" option in "F.interpolate" or "nn.functional.grid_sample" in PyTorch1.7, we recommend you to follow our setting.
+Especially, do not use under PyTorch1.4, which may lead to yield a degraded performance.
 
 
 
@@ -182,6 +168,22 @@ python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --S_trn 1 --S_tst 1
 ```
 ### Description
 * You can freely regulate other arguments in the parser of **main.py**.
+
+
+**Reference**:  
+> Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", https://arxiv.org/abs/2103.16206, 2021. (* *equal contribution*)
+> 
+**BibTeX**
+```bibtex
+@article{sim2021xvfi,
+  title={XVFI: eXtreme Video Frame Interpolation},
+  author={Sim, Hyeonjun and Oh, Jihyong and Kim, Munchurl},
+  journal={arXiv preprint arXiv:2103.16206},
+  year={2021}
+}
+```
+
+
 
 ## Contact
 If you have any question, please send an email to either flhy5836@kaist.ac.kr or jhoh94@kaist.ac.kr.
