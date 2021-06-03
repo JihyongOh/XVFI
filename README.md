@@ -8,6 +8,13 @@ Last Update: 20210603
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
 If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
 
+### Examples of the VFI (x8 Multi-Frame Interpolation) results on X-TEST
+![results_045_resized](/figures/results_045_resized_768.gif "results_045_resized")
+![results_079_resized](/figures/results_079_resized_768.gif "results_079_resized")
+![results_158_resized](/figures/results_158_resized_768.gif "results_158_resized")\
+The 4K 30fps input frames are interpolated to be 4K 240fps frames. All results are encoded at 30fps to be played as x8 slow motion and spatially down-scaled due to the limit of file sizes.
+
+
 ## Table of Contents
 1. [X4K1000FPS](#X4K1000FPS)
 1. [Requirements](#Requirements)
@@ -95,13 +102,6 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --modul
 python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --module_scale_factor 4 --S_tst 3 --multiple 8 
 ```
 ==> It would yield **(PSNR/SSIM/tOF) = (28.86/0.858/2.67)**.
-
-
-### Examples of the VFI(x8) results on X-TEST
-![results_045_resized](/figures/results_045_resized_768.gif "results_045_resized")
-![results_079_resized](/figures/results_079_resized_768.gif "results_079_resized")
-![results_158_resized](/figures/results_158_resized_768.gif "results_158_resized")\
-The 4K 30fps input frames are interpolated to be 4K 240fps frames. All results are encoded at 30fps to be played as x8 slow motion and spatially down-scaled due to the limit of file sizes.
 
 
 
