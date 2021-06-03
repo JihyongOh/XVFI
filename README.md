@@ -20,7 +20,7 @@ If you find this repository useful, please consider citing our [paper](https://a
 #### Dataset of high-resolution (4096×2160), high-fps (1000fps) video frames with extreme motion.
 ![003](/figures/003.gif "003") ![004](/figures/004.gif "004") ![045](/figures/045.gif "045")
 ![078](/figures/078.gif "078") ![081](/figures/081.gif "081") ![146](/figures/146.gif "146")\
-<Some examples of X4K1000FPS dataset, which are frames of 1000-fps and 4K-resolution. Our dataset contains the various scenes with extreme motions. (Displayed in spatiotemporally subsampled .gif files)>
+Some examples of X4K1000FPS dataset, which are frames of 1000-fps and 4K-resolution. Our dataset contains the various scenes with extreme motions. (Displayed in spatiotemporally subsampled .gif files)
 
 We provide our X4K1000FPS dataset which consists of X-TEST and X-TRAIN. Please refer to our main/suppl. [paper](https://arxiv.org/abs/2103.16206) for the details of the dataset. You can download the dataset from this dropbox [link](https://www.dropbox.com/sh/duisote638etlv2/AABJw5Vygk94AWjGM4Se0Goza?dl=0).
 
@@ -96,12 +96,13 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --modul
 ```
 ==> It would yield **(PSNR/SSIM/tOF) = (28.86/0.858/2.67)**.
 
-<!-- 
-#### Dataset of high-resolution (4096×2160), high-fps (1000fps) video frames with extreme motion.
-![003](/figures/003.gif "003") ![004](/figures/004.gif "004") ![045](/figures/045.gif "045")
-![078](/figures/078.gif "078") ![081](/figures/081.gif "081") ![146](/figures/146.gif "146")\
-<Some examples of X4K1000FPS dataset, which are frames of 1000-fps and 4K-resolution. Our dataset contains the various scenes with extreme motions. (Displayed in spatiotemporally subsampled .gif files)>
- -->
+
+### Examples of the VFI(x8) results on X-TEST
+![results_045_resized](/figures/results_045_resized_768.gif "results_045_resized")
+![results_079_resized](/figures/results_079_resized_768.gif "results_079_resized")
+![results_158_resized](/figures/results_158_resized_768.gif "results_158_resized")\
+The 4K 30fps input frames are interpolated to be 4K 240fps frames. All results are encoded at 30fps to be played as x8 slow motion and spatially down-scaled due to the limit of file sizes.
+
 
 
 ### Description
