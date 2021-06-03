@@ -9,8 +9,8 @@ If you find this repository useful, please consider citing our [paper](https://a
 ## Table of Contents
 1. [X4K1000FPS](#X4K1000FPS)
 1. [Requirements](#Requirements)
-1. [Test Code](#Test Code)
-1. [Training Code](#Training Code)
+1. [TestCode](#Test Code)
+1. [TrainingCode](#Training Code)
 1. [Reference](#Reference)
 
 
@@ -177,7 +177,8 @@ python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_fact
 * You can freely regulate other arguments in the parser of **main.py**.
 
 
-**Reference**:  
+<!-- **Reference**:   -->
+## Reference
 > Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", https://arxiv.org/abs/2103.16206, 2021. (* *equal contribution*)
 > 
 **BibTeX**
