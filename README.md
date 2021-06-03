@@ -6,6 +6,13 @@ Last Update: 20210603
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
 If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
 
+## Table of Contents
+1. [X4K1000FPS](#X4K1000FPS)
+1. [Requirements](#Requirements)
+1. [Test Code](#Test Code)
+1. [Training Code](#Training Code)
+1. [Reference](#Reference)
+
 
 ## X4K1000FPS
 #### Dataset of high-resolution, high-fps video frames with extreme motion
@@ -52,7 +59,7 @@ We provide our X4K1000FPS dataset which consists of X-TEST and X-TRAIN. Please r
 After downloading the files from the link, decompress the `encoded_test.tar.gz` and `encoded_train.tar.gz`. The resulting .mp4 files can be decoded into .png files via running `mp4_decoding.py`. Please follow the instruction written in `mp4_decoding.py`.
 
 
-### Requirements
+## Requirements
 Our code is implemented using PyTorch1.7, and was tested under the following setting:  
 * Python 3.7 
 * PyTorch 1.7.1
@@ -66,7 +73,7 @@ Especially, if you use the other PyTorch versions, it may lead to yield a differ
 
 
 
-## Test code
+## Test Code
 ### Quick Start for X-TEST (x8 Multi-Frame Interpolation as in Table 2)
 1. Download the source codes in a directory of your choice **\<source_path\>**.
 2. First download our X-TEST test dataset by following the above section 'X4K1000FPS'.
@@ -126,7 +133,7 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_sca
 * It should be noted that there is a typo "S_trn
 and S_tst are set to 2" in the current version of XVFI paper, which should be modified to 1 (not 2), sorry for inconvenience.
 
-## Training code
+## Training Code
 ### Quick Start for X-TRAIN
 1. Download the source codes in a directory of your choice **\<source_path\>**.
 2. First download our X-TRAIN train/val/test datasets by following the above section 'X4K1000FPS' and place them as belows:
