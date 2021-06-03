@@ -149,7 +149,7 @@ XVFI
 ```
 3. Run **main.py** with the following options in parse_args:  
 ```bash
-python main.py --phase 'train' --exp_num 1 --dataset 'X4K1000FPS' --S_trn 3 --S_tst 5
+python main.py --phase 'train' --exp_num 1 --dataset 'X4K1000FPS' --module_scale_factor 4 --S_trn 3 --S_tst 5
 ```
 ### Quick Start for Vimeo90K
 1. Download the source codes in a directory of your choice **\<source_path\>**.
@@ -164,7 +164,7 @@ XVFI
 ```
 3. Run **main.py** with the following options in parse_args:  
 ```bash
-python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --S_trn 1 --S_tst 1
+python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_factor 2 --S_trn 1 --S_tst 1
 ```
 ### Description
 * You can freely regulate other arguments in the parser of **main.py**.
