@@ -94,6 +94,14 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'X4K1000FPS' --modul
 ```
 ==> It would yield **(PSNR/SSIM/tOF) = (28.86/0.858/2.67)**.
 
+<!-- 
+#### Dataset of high-resolution (4096×2160), high-fps (1000fps) video frames with extreme motion.
+![003](/figures/003.gif "003") ![004](/figures/004.gif "004") ![045](/figures/045.gif "045")
+![078](/figures/078.gif "078") ![081](/figures/081.gif "081") ![146](/figures/146.gif "146")\
+<Some examples of X4K1000FPS dataset, which are frames of 1000-fps and 4K-resolution. Our dataset contains the various scenes with extreme motions. (Displayed in spatiotemporally subsampled .gif files)>
+ -->
+
+
 ### Description
 * After running with the above test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_X4K1000FPS_exp1**, then obtain the PSNR/SSIM/tOF results per each test clip as "total_metrics.csv" in the same folder. 
 * Our proposed XVFI-Net can start from any downscaled input upward by regulating '--S_tst', which is adjustable in terms of
