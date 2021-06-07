@@ -153,15 +153,15 @@ and S_tst are set to 2" in the current version of XVFI paper, which should be mo
 XVFI
 └── custom_path
    ├── scene1
-       ├── 'xxxx.png'
+       ├── 'xxx.png'
        ├── ...
-       └── 'xxxx.png'
+       └── 'xxx.png'
    ...
    
    ├── sceneN
-       ├── 'xxxx.png'
+       ├── 'xxxxx.png'
        ├── ...
-       └── 'xxxx.png'
+       └── 'xxxxx.png'
 
 ```
 4. Download the pre-trained weights, which was trained by X-TRAIN, from [this link](https://www.dropbox.com/s/xj2ixvay0e5ldma/XVFInet_X4K1000FPS_exp1_latest.pt?dl=0) to place in **\<source_path\>/checkpoint_dir/XVFInet_X4K1000FPS_exp1**.
