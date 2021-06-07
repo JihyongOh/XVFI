@@ -109,11 +109,11 @@ def get_train_data(args, max_t_step_size):
 
 
 def get_test_data(args, multiple, validation):
-    if args.dataset == 'X4K1000FPS':
+    if args.dataset == 'X4K1000FPS' and args.phase != 'test_custom':
         data_test = X_Test(args, multiple, validation)  # 'validation' for validation while training for simplicity
-    elif args.dataset == 'Vimeo':
+    elif args.dataset == 'Vimeo' and args.phase != 'test_custom':
         data_test = Vimeo_Test(args, validation)
-    elif args.datset == 'test_Custom':
+    elif args.phase == 'test_custom':
         data_test = Custom_Test(args, multiple)
     dataloader = torch.utils.data.DataLoader(data_test, batch_size=1, drop_last=True, shuffle=False, pin_memory=False)
     return dataloader
@@ -371,34 +371,57 @@ class Vimeo_Test(data.Dataset):
     def __len__(self):
         return self.num_scene
 
-
-def make_2D_dataset_Custom_Test(dir):
+def make_2D_dataset_Custom_Test(dir, multiple):
     """ make [I0,I1,It,t,scene_folder] """
     """ 1D (accumulated) """
     testPath = []
+    t = np.linspace((1 / multiple), (1 - (1 / multiple)), (multiple - 1))
     for scene_folder in sorted(glob.glob(os.path.join(dir, '*/'))):  # [scene1, scene2, scene3, ...]
         frame_folder = sorted(glob.glob(scene_folder + '*.png'))  # ex) ['00000.png',...,'00123.png']
         for idx in range(0, len(frame_folder)):
             if idx == len(frame_folder) - 1:
                 break
-            I0I1It_paths = []
-            I0I1It_paths.append(frame_folder[idx])  # I0 (fix)
-            I0I1It_paths.append(frame_folder[idx + 1])  # I1 (fix)
-            target_t_Idx = int(frame_folder[idx].split('\\')[-1].split('.'))[0]+'_1.png'
-            # ex) target t name: 00017.png => '00017_1.png'
-            I0I1It_paths.append(os.path.join(scene_folder, target_t_Idx))  # It
-            I0I1It_paths.append(0.5) # t
-            I0I1It_paths.append(frame_folder.split(os.path.join(dir, ''))[-1])  # scene1
-            testPath.append(I0I1It_paths)
-
+            for suffix, mul in enumerate(range(multiple - 1)):
+                I0I1It_paths = []
+                I0I1It_paths.append(frame_folder[idx])  # I0 (fix)
+                I0I1It_paths.append(frame_folder[idx + 1])  # I1 (fix)
+                target_t_Idx = frame_folder[idx].split('/')[-1].split('.')[0]+'_' + str(suffix).zfill(3) + '.png'
+                # ex) target t name: 00017.png => '00017_1.png'
+                I0I1It_paths.append(os.path.join(scene_folder, target_t_Idx))  # It
+                I0I1It_paths.append(t[mul]) # t
+                I0I1It_paths.append(frame_folder[idx].split(os.path.join(dir, ''))[-1].split('/')[0])  # scene1
+                testPath.append(I0I1It_paths)
     return testPath
+
+
+# def make_2D_dataset_Custom_Test(dir):
+#     """ make [I0,I1,It,t,scene_folder] """
+#     """ 1D (accumulated) """
+#     testPath = []
+#     for scene_folder in sorted(glob.glob(os.path.join(dir, '*/'))):  # [scene1, scene2, scene3, ...]
+#         frame_folder = sorted(glob.glob(scene_folder + '*.png'))  # ex) ['00000.png',...,'00123.png']
+#         for idx in range(0, len(frame_folder)):
+#             if idx == len(frame_folder) - 1:
+#                 break
+#             I0I1It_paths = []
+#             I0I1It_paths.append(frame_folder[idx])  # I0 (fix)
+#             I0I1It_paths.append(frame_folder[idx + 1])  # I1 (fix)
+#             target_t_Idx = frame_folder[idx].split('/')[-1].split('.')[0]+'_x2.png'
+#             # ex) target t name: 00017.png => '00017_1.png'
+#             I0I1It_paths.append(os.path.join(scene_folder, target_t_Idx))  # It
+#             I0I1It_paths.append(0.5) # t
+#             I0I1It_paths.append(frame_folder[idx].split(os.path.join(dir, ''))[-1].split('/')[0])  # scene1
+#             testPath.append(I0I1It_paths)
+#     for asdf in testPath:
+#         print(asdf)
+#     return testPath
 
 
 class Custom_Test(data.Dataset):
     def __init__(self, args, multiple):
         self.args = args
         self.multiple = multiple
-        self.testPath = make_2D_dataset_Custom_Test(self.args.custom_path)
+        self.testPath = make_2D_dataset_Custom_Test(self.args.custom_path, self.multiple)
         self.nIterations = len(self.testPath)
 
         # Raise error if no images found in test_data_path.
@@ -407,8 +430,8 @@ class Custom_Test(data.Dataset):
 
     def __getitem__(self, idx):
         I0, I1, It, t_value, scene_name = self.testPath[idx]
-
-        I0I1It_Path = [I0, I1, It]
+        dummy_dir = I1 # due to there is not ground truth intermediate frame.
+        I0I1It_Path = [I0, I1, dummy_dir]
 
         frames = frames_loader_test(self.args, I0I1It_Path, None)
         # including "np2Tensor [-1,1] normalized"
