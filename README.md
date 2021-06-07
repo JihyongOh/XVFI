@@ -225,8 +225,7 @@ XVFI
 python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_factor 2 --S_trn 1 --S_tst 1
 ```
 ### Description
-* You can freely regulate other arguments in the parser of **main.py**.
-https://github.com/JihyongOh/XVFI/blob/484bdea1448c22459b10548a488909c268e1dde9/main.py#L12-L72
+* You can freely regulate other arguments in the parser of **main.py**, [here](https://github.com/JihyongOh/XVFI/blob/484bdea1448c22459b10548a488909c268e1dde9/main.py#L12-L72)
 
 <!-- **Reference**:   -->
 ## Reference
