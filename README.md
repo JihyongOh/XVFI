@@ -1,4 +1,3 @@
-
 # XVFI 	[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/xvfi-extreme-video-frame-interpolation/video-frame-interpolation-on-vimeo90k)](https://paperswithcode.com/sota/video-frame-interpolation-on-vimeo90k?p=xvfi-extreme-video-frame-interpolation)
 
 **This is the official repository of XVFI (eXtreme Video Frame Interpolation), https://arxiv.org/abs/2103.16206**
@@ -164,17 +163,18 @@ XVFI
        └── 'xxxxx.png'
 
 ```
-4. Download the pre-trained weights, which was trained by X-TRAIN, from [this link](https://www.dropbox.com/s/xj2ixvay0e5ldma/XVFInet_X4K1000FPS_exp1_latest.pt?dl=0) to place in **\<source_path\>/checkpoint_dir/XVFInet_X4K1000FPS_exp1**.
-```
-XVFI
-└── checkpoint_dir
-   └── XVFInet_X4K1000FPS_exp1
-       ├── XVFInet_X4K1000FPS_exp1_latest.pt           
-```
+3. Download the pre-trained weights trained on on X-TRAIN or Vimeo90K as decribed [above](#test)
+
 4. Run **main.py** with the following options in parse_args (ex) x8 Multi-Frame Interpolation): 
 ```bash
-python main.py --gpu 0 --phase 'test_custom' --exp_num 1 --module_scale_factor 4 --S_tst 5 --multiple 8 --custom_path './custom_path'
+# For the model trained on X-TRAIN
+python main.py --gpu 0 --phase 'test_custom' --exp_num 1 --dataset 'X4K1000FPS' --module_scale_factor 4 --S_tst 5 --multiple 8 --custom_path './custom_path'
 ```
+```bash
+# For the model trained on Vimeo90K
+python main.py --gpu 0 --phase 'test_custom' --exp_num 1 --dataset 'Vimeo' --module_scale_factor 2 --S_tst 1 --multiple 8 --custom_path './custom_path'
+```
+
 
 ### Description
 * Our proposed XVFI-Net can start from any downscaled input upward by regulating '--S_tst', which is adjustable in terms of
