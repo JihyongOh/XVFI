@@ -148,7 +148,7 @@ and S_tst are set to 2" in the current version of XVFI paper, which should be mo
 ## Test_Custom
 ### Quick Start for your own video data ('--custom_path') for any Multi-Frame Interpolation (x M)
 1. Download the source codes in a directory of your choice **\<source_path\>**.
-2. First prepare your own video datasets in **\<source_path\>\custom_path** by following a hierarchy as belows:
+2. First prepare your own video datasets in **\<source_path\>/custom_path** by following a hierarchy as belows:
 ```
 XVFI
 └── custom_path
@@ -173,7 +173,7 @@ XVFI
 ```
 4. Run **main.py** with the following options in parse_args (ex) x8 Multi-Frame Interpolation): 
 ```bash
-python main.py --gpu 0 --phase 'test_custom' --exp_num 1 --module_scale_factor 4 --S_tst 5 --multiple 8 
+python main.py --gpu 0 --phase 'test_custom' --exp_num 1 --module_scale_factor 4 --S_tst 5 --multiple 8 --custom_path './custom_path'
 ```
 
 ### Description
