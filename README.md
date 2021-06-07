@@ -19,6 +19,7 @@ The 4K@30fps input frames are interpolated to be 4K@240fps frames. All results a
 1. [X4K1000FPS](#X4K1000FPS)
 1. [Requirements](#Requirements)
 1. [Test](#Test)
+1. [Test_Custom](#Test_Custom)
 1. [Training](#Training)
 1. [Reference](#Reference)
 1. [Contact](#Contact)
@@ -133,7 +134,7 @@ XVFI
 ```
 4. Run **main.py** with the following options in parse_args: 
 ```bash
-python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_scale_factor 2 --S_tst 1
+python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_scale_factor 2 --S_tst 1 --multiple 2
 ```
 ==> It would yield **PSNR = 35.07** on Vimeo90K. 
 
@@ -143,6 +144,45 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_sca
 * The SSIM result of 0.9760 as in Fig. 8 was measured by matlab [ssim](https://arxiv.org/pdf/2103.12340.pdf) function for a fair comparison after running the above guide because other SOTA methods did so. We also upload "compare_psnr_ssim.m" matlab file to obtain it. 
 * It should be noted that there is a typo "S_trn
 and S_tst are set to 2" in the current version of XVFI paper, which should be modified to 1 (not 2), sorry for inconvenience.
+
+## Test_Custom
+### Quick Start for your own video data ('--custom_path') for any Multi-Frame Interpolation (x M)
+1. Download the source codes in a directory of your choice **\<source_path\>**.
+2. First prepare your own video datasets in **\<source_path\>\custom_path** by following a hierarchy as belows:
+```
+XVFI
+└── custom_path
+   ├── scene1
+       ├── 'xxxx.png'
+       ├── ...
+       └── 'xxxx.png'
+   ...
+   
+   ├── sceneN
+       ├── 'xxxx.png'
+       ├── ...
+       └── 'xxxx.png'
+
+```
+4. Download the pre-trained weights, which was trained by X-TRAIN, from [this link](https://www.dropbox.com/s/xj2ixvay0e5ldma/XVFInet_X4K1000FPS_exp1_latest.pt?dl=0) to place in **\<source_path\>/checkpoint_dir/XVFInet_X4K1000FPS_exp1**.
+```
+XVFI
+└── checkpoint_dir
+   └── XVFInet_X4K1000FPS_exp1
+       ├── XVFInet_X4K1000FPS_exp1_latest.pt           
+```
+4. Run **main.py** with the following options in parse_args (ex) x8 Multi-Frame Interpolation): 
+```bash
+python main.py --gpu 0 --phase 'test_custom' --exp_num 1 --module_scale_factor 4 --S_tst 5 --multiple 8 
+```
+
+### Description
+* Our proposed XVFI-Net can start from any downscaled input upward by regulating '--S_tst', which is adjustable in terms of
+the number of scales for inference according to the input resolutions or the motion magnitudes.
+* You can get any Multi-Frame Interpolation (x M) result by regulating '--multiple'.
+* It only supports for '.png' format.
+* Since we can not cover diverse possibilites of naming rule for custom frames, please sort your own frames properly.
+
 
 ## Training
 ### Quick Start for X-TRAIN
