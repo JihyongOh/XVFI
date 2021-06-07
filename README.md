@@ -163,7 +163,7 @@ XVFI
        └── 'xxxxx.png'
 
 ```
-3. Download the pre-trained weights trained on on X-TRAIN or Vimeo90K as decribed [above](#test)
+3. Download the pre-trained weights trained on X-TRAIN or Vimeo90K as decribed [above](#test).
 
 4. Run **main.py** with the following options in parse_args (ex) x8 Multi-Frame Interpolation): 
 ```bash
