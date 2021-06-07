@@ -16,7 +16,7 @@ def parse_args():
     parser.add_argument('--net_type', type=str, default='XVFInet', choices=['XVFInet'], help='The type of Net')
     parser.add_argument('--net_object', default=XVFInet, choices=[XVFInet], help='The type of Net')
     parser.add_argument('--exp_num', type=int, default=1, help='The experiment number')
-    parser.add_argument('--phase', type=str, default='test', choices=['train', 'test', 'metrics_evaluation','test_Custom'])
+    parser.add_argument('--phase', type=str, default='test', choices=['train', 'test', 'test_custom', 'metrics_evaluation',])
     parser.add_argument('--continue_training', action='store_true', default=False, help='continue the training')
 
     """ Information of directories """
@@ -25,7 +25,7 @@ def parse_args():
     parser.add_argument('--checkpoint_dir', type=str, default='./checkpoint_dir', help='checkpoint_dir')
     parser.add_argument('--log_dir', type=str, default='./log_dir', help='Directory name to save training logs')
 
-    parser.add_argument('--dataset', default='X4K1000FPS', choices=['X4K1000FPS', 'Vimeo','test_Custom'],
+    parser.add_argument('--dataset', default='X4K1000FPS', choices=['X4K1000FPS', 'Vimeo'],
                         help='Training/test Dataset')
 
     parser.add_argument('--train_data_path', type=str, default='./X4K1000FPS/train')
@@ -61,13 +61,13 @@ def parse_args():
     """ Weighting Parameters Lambda for Losses (when [phase=='train']) """
     parser.add_argument('--rec_lambda', type=float, default=1.0, help='Lambda for Reconstruction Loss')
 
-    """ Settings for Testing (when [phase=='test' or 'test_Custom']) """
+    """ Settings for Testing (when [phase=='test' or 'test_custom']) """
     parser.add_argument('--saving_flow_flag', default=False)
-    parser.add_argument('--multiple', type=int, default=8, choices=[4, 8, 16, 32])
+    parser.add_argument('--multiple', type=int, default=8, help='Due to the indexing problem of the file names, we recommend to use the power of 2. (e.g. 2, 4, 8, 16 ...). CAUTION : For the provided X-TEST, multiple should be one of [2, 4, 8, 16, 32].')
     parser.add_argument('--metrics_types', type=list, default=["PSNR", "SSIM", "tOF"], choices=["PSNR", "SSIM", "tOF"])
 
-    """ Settings for test_Custom (when [phase=='test_Custom']) """
-    parser.add_argument('--custom_data_path', type=str, default='./custom_path', help='path for custom video containing frames')
+    """ Settings for test_custom (when [phase=='test_custom']) """
+    parser.add_argument('--custom_path', type=str, default='./custom_path', help='path for custom video containing frames')
 
     return check_args(parser.parse_args())
 
@@ -91,7 +91,8 @@ def check_args(args):
 def main():
     args = parse_args()
     if args.dataset == 'Vimeo':
-        args.multiple = 2
+        if args.phase != 'test_custom':
+            args.multiple = 2
         args.S_trn = 1
         args.S_tst = 1
         args.module_scale_factor = 2
@@ -132,7 +133,7 @@ def main():
         train(model_net, criterion, device, SM, args)
         epoch = args.epochs - 1
 
-    elif args.phase == "test" or args.phase == "metrics_evaluation" or args.phase == 'test_Custom':
+    elif args.phase == "test" or args.phase == "metrics_evaluation" or args.phase == 'test_custom':
         checkpoint = SM.load_model()
         model_net.load_state_dict(checkpoint['state_dict_Model'])
         epoch = checkpoint['last_epoch']
@@ -152,7 +153,7 @@ def main():
                                                                   postfix=postfix, validation=False)
         SM.write_info('Final 4k frames PSNR : {:.4}\n'.format(testPSNR))
 
-    if args.dataset == 'X4K1000FPS':
+    if args.dataset == 'X4K1000FPS' and args.phase != 'test_custom':
         final_pred_save_path = os.path.join(args.test_img_dir, args.model_dir, 'epoch_' + str(epoch).zfill(5)) + postfix
         metrics_evaluation_X_Test(final_pred_save_path, args.test_data_path, args.metrics_types,
                                   flow_flag=args.saving_flow_flag, multiple=args.multiple)
@@ -254,8 +255,7 @@ def train(model_net, criterion, device, save_manager, args):
             start_time = time.time()
 
             if trainIndex % args.freq_display == 0:
-                progress.
-                print(trainIndex)
+                progress.print(trainIndex)
                 batch_images = get_batch_images(args, save_img_num=args.save_img_num,
                                                 save_images=[pred_frameT, pred_coarse_flow, pred_fine_flow, frameT,
                                                              simple_mean, occ_map])
@@ -344,7 +344,7 @@ def test(test_loader, model_net, criterion, epoch, args, device, multiple, postf
 
 
 
-            if not args.phase != 'test_Custom':
+            if args.phase != 'test_custom':
                 test_loss = args.rec_lambda * multi_scale_recon_loss(pred_frameT, frameT)
 
                 pred_frameT = np.squeeze(pred_frameT.detach().cpu().numpy())
@@ -388,19 +388,19 @@ def test(test_loader, model_net, criterion, epoch, args, device, multiple, postf
                 start_time = time.time()
 
                 if (testIndex % (multiple - 1)) == multiple - 2:
-                    progress.
-                    print(testIndex)
+                    progress.print(testIndex)
 
             else:
-                epoch_save_path = args.custom_data_path
+                epoch_save_path = args.custom_path
                 scene_save_path = os.path.join(epoch_save_path, scene_name[0])
                 pred_frameT = np.squeeze(pred_frameT.detach().cpu().numpy())
                 output_img = np.around(denorm255_np(np.transpose(pred_frameT, [1, 2, 0])))  # [h,w,c] and [-1,1] to [0,255]
+                print(scene_save_path + '/' + It_Path[0])
                 cv2.imwrite(scene_save_path + '/' + It_Path[0], output_img.astype(np.uint8))
 
-                losses=0.0
-                PSNRs = 0.0
-                SSIMs = 0.0
+                losses.update(0.0, 1)
+                PSNRs.update(0.0, 1)
+                SSIMs.update(0.0, 1)
 
         print("-----------------------------------------------------------------------------------------------")
 
