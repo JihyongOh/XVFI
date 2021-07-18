@@ -423,8 +423,6 @@ class RefineUNet(nn.Module):
 		self.lrelu = nn.ReLU()
 		self.NN = nn.UpsamplingNearest2d(scale_factor=2)
 
-		nn.Conv2d(args.img_ch, self.nf, [3, 3], 1, [1, 1]),  
-
 		self.enc1 = nn.Conv2d((4*self.nf)//self.scale//self.scale + 4*args.img_ch + 4, self.nf, [4, 4], 2, [1, 1])
 		self.enc2 = nn.Conv2d(self.nf, 2*self.nf, [4, 4], 2, [1, 1])
 		self.enc3 = nn.Conv2d(2*self.nf, 4*self.nf, [4, 4], 2, [1, 1])
