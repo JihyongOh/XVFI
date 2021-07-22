@@ -2,7 +2,7 @@
 
 **This is the official repository of XVFI (eXtreme Video Frame Interpolation), https://arxiv.org/abs/2103.16206**
 
-Last Update: 20210607
+Last Update: 20210723
 
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
 If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
