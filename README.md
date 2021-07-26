@@ -20,6 +20,7 @@ The 4K@30fps input frames are interpolated to be 4K@240fps frames. All results a
 1. [Test](#Test)
 1. [Test_Custom](#Test_Custom)
 1. [Training](#Training)
+1. [Collection_of_Visual_Results](#Collection_of_Visual_Results)
 1. [Reference](#Reference)
 1. [Contact](#Contact)
 
@@ -226,6 +227,10 @@ python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_fact
 ```
 ### Description
 * You can freely regulate other arguments in the parser of **main.py**, [here](https://github.com/JihyongOh/XVFI/blob/484bdea1448c22459b10548a488909c268e1dde9/main.py#L12-L72)
+
+## Collection_of_Visual_Results
+* We also provide all visual results on X-TEST for an easier comparison as belows. Each zip file has 512MB.
+* [AdaCoF<sub>*o*</sub>](https://www.dropbox.com/s/6ivl96nwrdl7oh1/AdaCoF_final_x8%20%28pretrained%2C%20original%29.zip?dl=0), [AdaCoF<sub>*f*</sub>](https://www.dropbox.com/s/3iqwzyns0jld2xp/AdaCoF_final_x8%20Retrain.zip?dl=0), [FeFlow<sub>*o*</sub>](https://www.dropbox.com/s/ukn8acqrim5vg7b/FeFlow_final_x8%20%28pretrained%2C%20original%29.zip?dl=0), [FeFlow<sub>*f*</sub>](https://www.dropbox.com/s/q26w3c9tm455jau/FeFlow_final_x8%20Retrain.zip?dl=0), [DAIN<sub>*o*</sub>](https://www.dropbox.com/s/yjtj4tvfhs2niqq/DAIN_final_x8%20%28pretrained%2C%20original%29.zip?dl=0), [DAIN<sub>*f*</sub>](https://www.dropbox.com/s/ftvimsx4czab5z4/DAIN_final_x8%20Retrain.zip?dl=0), [XVFI-Net](https://www.dropbox.com/s/3sbjjy226njk8by/XVFI-Net_final_Strn3_Stst3.zip?dl=0) (S<sub>*tst*</sub>=3), [XVFI-Net](https://www.dropbox.com/s/dgf61z08wab3jie/XVFI-Net_final_Strn3_Stst5.zip?dl=0) (S<sub>*tst*</sub>=5)
 
 <!-- **Reference**:   -->
 ## Reference
