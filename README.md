@@ -229,7 +229,7 @@ python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_fact
 * You can freely regulate other arguments in the parser of **main.py**, [here](https://github.com/JihyongOh/XVFI/blob/484bdea1448c22459b10548a488909c268e1dde9/main.py#L12-L72)
 
 ## Collection_of_Visual_Results
-* We also provide all visual results on X-TEST for an easier comparison as belows. Each zip file has about 1~1.5GB.
+* We also provide all visual results (x8 Multi-Frame Interpolation) on X-TEST for an easier comparison as belows. Each zip file has about 1~1.5GB.
 * [AdaCoF<sub>*o*</sub>](https://www.dropbox.com/s/6ivl96nwrdl7oh1/AdaCoF_final_x8%20%28pretrained%2C%20original%29.zip?dl=0), [AdaCoF<sub>*f*</sub>](https://www.dropbox.com/s/3iqwzyns0jld2xp/AdaCoF_final_x8%20Retrain.zip?dl=0), [FeFlow<sub>*o*</sub>](https://www.dropbox.com/s/ukn8acqrim5vg7b/FeFlow_final_x8%20%28pretrained%2C%20original%29.zip?dl=0), [FeFlow<sub>*f*</sub>](https://www.dropbox.com/s/q26w3c9tm455jau/FeFlow_final_x8%20Retrain.zip?dl=0), [DAIN<sub>*o*</sub>](https://www.dropbox.com/s/yjtj4tvfhs2niqq/DAIN_final_x8%20%28pretrained%2C%20original%29.zip?dl=0), [DAIN<sub>*f*</sub>](https://www.dropbox.com/s/ftvimsx4czab5z4/DAIN_final_x8%20Retrain.zip?dl=0), [XVFI-Net](https://www.dropbox.com/s/3sbjjy226njk8by/XVFI-Net_final_Strn3_Stst3.zip?dl=0) (S<sub>*tst*</sub>=3), [XVFI-Net](https://www.dropbox.com/s/dgf61z08wab3jie/XVFI-Net_final_Strn3_Stst5.zip?dl=0) (S<sub>*tst*</sub>=5)
 * The quantitative comparisons (Table2 and Figure5) are attached as belows for a reference.
 ![Table2](/figures/Table2.PNG "Table2")
