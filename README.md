@@ -244,7 +244,7 @@ python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_fact
 @article{sim2021xvfi,
   title={XVFI: eXtreme Video Frame Interpolation},
   author={Sim, Hyeonjun and Oh, Jihyong and Kim, Munchurl},
-  journal={arXiv preprint arXiv:2103.16206},
+  booktitle={Proceedings of the IEEE International Conference on Computer Vision (ICCV)},
   year={2021}
 }
 ```
