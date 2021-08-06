@@ -2,7 +2,7 @@
 
 **This is the official repository of XVFI (eXtreme Video Frame Interpolation), https://arxiv.org/abs/2103.16206**
 
-Last Update: 20210726
+Last Update: 20210806
 
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
 If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
@@ -141,9 +141,9 @@ python main.py --gpu 0 --phase 'test' --exp_num 1 --dataset 'Vimeo' --module_sca
 ### Description
 * After running with the above test option, you can get the result images in **\<source_path\>/test_img_dir/XVFInet_Vimeo_exp1**.
 * There are certain code lines in front of the 'def main()' for a convenience when running with the Vimeo option.
-* The SSIM result of 0.9760 as in Fig. 8 was measured by matlab [ssim](https://arxiv.org/pdf/2103.12340.pdf) function for a fair comparison after running the above guide because other SOTA methods did so. We also upload "compare_psnr_ssim.m" matlab file to obtain it. 
-* It should be noted that there is a typo "S_trn
-and S_tst are set to 2" in the current version of XVFI paper, which should be modified to 1 (not 2), sorry for inconvenience.
+* The SSIM result of 0.9760 as in Fig. 8 was measured by matlab ssim function for a fair comparison after running the above guide because other SOTA methods did so. We also upload "compare_psnr_ssim.m" matlab file to obtain it. 
+* ~~It should be noted that there is a typo "S_trn
+and S_tst are set to 2" in the current version of XVFI paper, which should be modified to 1 (not 2), sorry for inconvenience.~~ -> Updated in the latest arXiv version.
 
 ## Test_Custom
 ### Quick Start for your own video data ('--custom_path') for any Multi-Frame Interpolation (x M)
