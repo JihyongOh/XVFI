@@ -48,37 +48,37 @@ class save_manager():
         self.log_file.close()
 
     def save_best_model(self, combined_state_dict, best_PSNR_flag):
-        file_name = self.checkpoint_dir + '/' + self.model_dir + '_latest.pt'
+        file_name = os.path.join(self.checkpoint_dir, self.model_dir + '_latest.pt')
         # file_name = "./checkpoint_dir/XVFInet_exp1/XVFInet_exp1_latest.ckpt
         torch.save(combined_state_dict, file_name)
         if best_PSNR_flag:
-            shutil.copyfile(file_name, self.checkpoint_dir + '/' + self.model_dir + '_best_PSNR.pt')
+            shutil.copyfile(file_name, os.path.join(self.checkpoint_dir, self.model_dir + '_best_PSNR.pt'))
 
     # file_path = "./checkpoint_dir/XVFInet_exp1/XVFInet_exp1_best_PSNR.ckpt
 
     def save_epc_model(self, combined_state_dict, epoch):
-        file_name = self.checkpoint_dir + '/' + self.model_dir + '_epc' + str(epoch) + '.pt'
+        file_name = os.path.join(self.checkpoint_dir, self.model_dir + '_epc' + str(epoch) + '.pt')
         # file_name = "./checkpoint_dir/XVFInet_exp1/XVFInet_exp1_epc10.ckpt
         torch.save(combined_state_dict, file_name)
 
     def load_epc_model(self, epoch):
-        checkpoint = torch.load(self.checkpoint_dir + '/' + self.model_dir + '_epc' + str(epoch - 1) + '.pt')
+        checkpoint = torch.load(os.path.join(self.checkpoint_dir, self.model_dir + '_epc' + str(epoch - 1) + '.pt'))
         print("load model '{}', epoch: {}, best_PSNR: {:3f}".format(
-            self.checkpoint_dir + '/' + self.model_dir + '_epc' + str(epoch - 1) + '.pt', checkpoint['last_epoch'] + 1,
+            os.path.join(self.checkpoint_dir, self.model_dir + '_epc' + str(epoch - 1) + '.pt'), checkpoint['last_epoch'] + 1,
             checkpoint['best_PSNR']))
         return checkpoint
 
     def load_model(self, ):
         # checkpoint = torch.load(self.checkpoint_dir + '/' + self.model_dir + '_latest.pt')
-        checkpoint = torch.load(self.checkpoint_dir + '/' + self.model_dir + '_latest.pt', map_location='cuda:0')
+        checkpoint = torch.load(os.path.join(self.checkpoint_dir, self.model_dir + '_latest.pt'), map_location='cuda:0')
         print("load model '{}', epoch: {},".format(
-            self.checkpoint_dir + '/' + self.model_dir + '_latest.pt', checkpoint['last_epoch'] + 1))
+            os.path.join(self.checkpoint_dir, self.model_dir + '_latest.pt'), checkpoint['last_epoch'] + 1))
         return checkpoint
 
     def load_best_PSNR_model(self, ):
-        checkpoint = torch.load(self.checkpoint_dir + '/' + self.model_dir + '_best_PSNR.pt')
+        checkpoint = torch.load(os.path.join(self.checkpoint_dir, self.model_dir + '_best_PSNR.pt'))
         print("load _best_PSNR model '{}', epoch: {}, best_PSNR: {:3f}, best_SSIM: {:3f}".format(
-            self.checkpoint_dir + '/' + self.model_dir + '_best_PSNR.pt', checkpoint['last_epoch'] + 1,
+            os.path.join(self.checkpoint_dir, self.model_dir + '_best_PSNR.pt'), checkpoint['last_epoch'] + 1,
             checkpoint['best_PSNR'], checkpoint['best_SSIM']))
         return checkpoint
 
@@ -187,8 +187,8 @@ def RGBframes_np2Tensor(imgIn, channel):
 def make_2D_dataset_X_Train(dir):
     framesPath = []
     # Find and loop over all the clips in root `dir`.
-    for scene_path in sorted(glob.glob(os.path.join(dir, '*/'))):
-        sample_paths = sorted(glob.glob(os.path.join(scene_path, '*/')))
+    for scene_path in sorted(glob.glob(os.path.join(dir, '*', ''))):
+        sample_paths = sorted(glob.glob(os.path.join(scene_path, '*', '')))
         for sample_path in sample_paths:
             frame65_list = []
             for frame in sorted(glob.glob(os.path.join(sample_path, '*.png'))):
@@ -243,8 +243,8 @@ def make_2D_dataset_X_Test(dir, multiple, t_step_size):
     """ 1D (accumulated) """
     testPath = []
     t = np.linspace((1 / multiple), (1 - (1 / multiple)), (multiple - 1))
-    for type_folder in sorted(glob.glob(os.path.join(dir, '*/'))):  # [type1,type2,type3,...]
-        for scene_folder in sorted(glob.glob(type_folder + '*/')):  # [scene1,scene2,..]
+    for type_folder in sorted(glob.glob(os.path.join(dir, '*', ''))):  # [type1,type2,type3,...]
+        for scene_folder in sorted(glob.glob(os.path.join(type_folder, '*', ''))):  # [scene1,scene2,..]
             frame_folder = sorted(glob.glob(scene_folder + '*.png'))  # 32 multiple, ['00000.png',...,'00032.png']
             for idx in range(0, len(frame_folder), t_step_size):  # 0,32,64,...
                 if idx == len(frame_folder) - 1:
@@ -287,9 +287,9 @@ class X_Test(data.Dataset):
         frames = frames_loader_test(self.args, I0I1It_Path, self.validation)
         # including "np2Tensor [-1,1] normalized"
 
-        I0_path = I0.split('/')[-1]
-        I1_path = I1.split('/')[-1]
-        It_path = It.split('/')[-1]
+        I0_path = I0.split(os.sep)[-1]
+        I1_path = I1.split(os.sep)[-1]
+        It_path = It.split(os.sep)[-1]
 
         return frames, np.expand_dims(np.array(t_value, dtype=np.float32), 0), scene_name, [It_path, I0_path, I1_path]
 
@@ -307,7 +307,7 @@ class Vimeo_Train(data.Dataset):
         while True:
             scene_path = f.readline().split('\n')[0]
             if not scene_path: break
-            frames_list = sorted(glob.glob(os.path.join(args.vimeo_data_path, 'sequences/', scene_path,
+            frames_list = sorted(glob.glob(os.path.join(args.vimeo_data_path, 'sequences', scene_path,
                                                         '*.png')))  # '../Datasets/vimeo_triplet/sequences/%05d/%04d/*.png'
             self.framesPath.append(frames_list)
         f.close
@@ -342,7 +342,7 @@ class Vimeo_Test(data.Dataset):
         while True:
             scene_path = f.readline().split('\n')[0]
             if not scene_path: break
-            frames_list = sorted(glob.glob(os.path.join(args.vimeo_data_path, 'sequences/', scene_path,
+            frames_list = sorted(glob.glob(os.path.join(args.vimeo_data_path, 'sequences', scene_path,
                                                         '*.png')))  # '../Datasets/vimeo_triplet/sequences/%05d/%04d/*.png'
             self.framesPath.append(frames_list)
         if validation:
@@ -356,15 +356,15 @@ class Vimeo_Test(data.Dataset):
             print("# of Vimeo triplet testset : ", self.num_scene)
 
     def __getitem__(self, idx):
-        scene_name = self.framesPath[idx][0].split('/')
+        scene_name = self.framesPath[idx][0].split(os.sep)
         scene_name = os.path.join(scene_name[-3], scene_name[-2])
         I0, It, I1 = self.framesPath[idx]
         I0I1It_Path = [I0, I1, It]
         frames = frames_loader_test(self.args, I0I1It_Path, validation=False)
 
-        I0_path = I0.split('/')[-1]
-        I1_path = I1.split('/')[-1]
-        It_path = It.split('/')[-1]
+        I0_path = I0.split(os.sep)[-1]
+        I1_path = I1.split(os.sep)[-1]
+        It_path = It.split(os.sep)[-1]
 
         return frames, np.expand_dims(np.array(0.5, dtype=np.float32), 0), scene_name, [It_path, I0_path, I1_path]
 
@@ -376,7 +376,7 @@ def make_2D_dataset_Custom_Test(dir, multiple):
     """ 1D (accumulated) """
     testPath = []
     t = np.linspace((1 / multiple), (1 - (1 / multiple)), (multiple - 1))
-    for scene_folder in sorted(glob.glob(os.path.join(dir, '*/'))):  # [scene1, scene2, scene3, ...]
+    for scene_folder in sorted(glob.glob(os.path.join(dir, '*', ''))):  # [scene1, scene2, scene3, ...]
         frame_folder = sorted(glob.glob(scene_folder + '*.png'))  # ex) ['00000.png',...,'00123.png']
         for idx in range(0, len(frame_folder)):
             if idx == len(frame_folder) - 1:
@@ -385,11 +385,11 @@ def make_2D_dataset_Custom_Test(dir, multiple):
                 I0I1It_paths = []
                 I0I1It_paths.append(frame_folder[idx])  # I0 (fix)
                 I0I1It_paths.append(frame_folder[idx + 1])  # I1 (fix)
-                target_t_Idx = frame_folder[idx].split('/')[-1].split('.')[0]+'_' + str(suffix).zfill(3) + '.png'
+                target_t_Idx = frame_folder[idx].split(os.sep)[-1].split('.')[0]+'_' + str(suffix).zfill(3) + '.png'
                 # ex) target t name: 00017.png => '00017_1.png'
                 I0I1It_paths.append(os.path.join(scene_folder, target_t_Idx))  # It
                 I0I1It_paths.append(t[mul]) # t
-                I0I1It_paths.append(frame_folder[idx].split(os.path.join(dir, ''))[-1].split('/')[0])  # scene1
+                I0I1It_paths.append(frame_folder[idx].split(os.path.join(dir, ''))[-1].split(os.sep)[0])  # scene1
                 testPath.append(I0I1It_paths)
     return testPath
 
@@ -436,9 +436,9 @@ class Custom_Test(data.Dataset):
         frames = frames_loader_test(self.args, I0I1It_Path, None)
         # including "np2Tensor [-1,1] normalized"
 
-        I0_path = I0.split('/')[-1]
-        I1_path = I1.split('/')[-1]
-        It_path = It.split('/')[-1]
+        I0_path = I0.split(os.sep)[-1]
+        I1_path = I1.split(os.sep)[-1]
+        It_path = It.split(os.sep)[-1]
 
         return frames, np.expand_dims(np.array(t_value, dtype=np.float32), 0), scene_name, [It_path, I0_path, I1_path]
 
@@ -538,8 +538,8 @@ def metrics_evaluation_X_Test(pred_save_path, test_data_path, metrics_types, flo
      """
 
     pred_framesPath = []
-    for type_folder in sorted(glob.glob(os.path.join(pred_save_path, '*/'))):  # [type1,type2,type3,...]
-        for scene_folder in sorted(glob.glob(type_folder + '*/')):  # [scene1,scene2,..]
+    for type_folder in sorted(glob.glob(os.path.join(pred_save_path, '*', ''))):  # [type1,type2,type3,...]
+        for scene_folder in sorted(glob.glob(os.path.join(type_folder, '*', ''))):  # [scene1,scene2,..]
             scene_framesPath = []
             for frame_path in sorted(glob.glob(scene_folder + '*.png')):
                 scene_framesPath.append(frame_path)
@@ -596,7 +596,7 @@ def metrics_evaluation_X_Test(pred_save_path, test_data_path, metrics_types, flo
                 output_img = cv2.imread(pred_frame).astype(np.float32)  # BGR, [0,255]
                 target_img = cv2.imread(pred_frame.replace(pred_save_path, test_data_path)).astype(
                     np.float32)  # BGR, [0,255]
-                pred_frame_split = pred_frame.split('/')
+                pred_frame_split = pred_frame.split(os.sep)
                 msg = "[x%d] frame %s, " % (
                 multiple, os.path.join(pred_frame_split[-3], pred_frame_split[-2], pred_frame_split[-1]))  # per frame
 
@@ -674,7 +674,7 @@ def metrics_evaluation_X_Test(pred_save_path, test_data_path, metrics_types, flo
         per_scene_pd_dict = {}  # per scene
         for cur_key in keys:
             # save_path = './test_img_dir/XVFInet_exp1/epoch_00099/Fast/003_TEST_Fast'
-            num_data = cur_key + "_[x%d]_[%s]" % (multiple, save_path.split('/')[-2])  # '003_TEST_Fast'
+            num_data = cur_key + "_[x%d]_[%s]" % (multiple, save_path.split(os.sep)[-2])  # '003_TEST_Fast'
             # num_data => ex) PSNR_[x8]_[041_TEST_Fast]
             """ per scene """
             per_scene_cur_list = np.float32(per_scene_list_dict[cur_key])
