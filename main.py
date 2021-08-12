@@ -28,9 +28,13 @@ def parse_args():
     parser.add_argument('--dataset', default='X4K1000FPS', choices=['X4K1000FPS', 'Vimeo'],
                         help='Training/test Dataset')
 
-    parser.add_argument('--train_data_path', type=str, default='./X4K1000FPS/train')
-    parser.add_argument('--val_data_path', type=str, default='./X4K1000FPS/val')
-    parser.add_argument('--test_data_path', type=str, default='./X4K1000FPS/test')
+    # parser.add_argument('--train_data_path', type=str, default='./X4K1000FPS/train')
+    # parser.add_argument('--val_data_path', type=str, default='./X4K1000FPS/val')
+    # parser.add_argument('--test_data_path', type=str, default='./X4K1000FPS/test')
+    parser.add_argument('--train_data_path', type=str, default='../Datasets/VIC_4K_1000FPS/train')
+    parser.add_argument('--val_data_path', type=str, default='../Datasets/VIC_4K_1000FPS/val')
+    parser.add_argument('--test_data_path', type=str, default='../Datasets/VIC_4K_1000FPS/test')
+
 
     parser.add_argument('--vimeo_data_path', type=str, default='./vimeo_triplet')
 
@@ -259,7 +263,9 @@ def train(model_net, criterion, device, save_manager, args):
                 batch_images = get_batch_images(args, save_img_num=args.save_img_num,
                                                 save_images=[pred_frameT, pred_coarse_flow, pred_fine_flow, frameT,
                                                              simple_mean, occ_map])
-                cv2.imwrite('./log_dir/{:03d}_{:04d}_training.png'.format(epoch, trainIndex), batch_images)
+                cv2.imwrite(os.path.join(args.log_dir, '{:03d}_{:04d}_training.png'.format(epoch, trainIndex)), batch_images)
+                
+                
 
         if epoch >= args.lr_dec_start:
             scheduler.step()
@@ -369,14 +375,14 @@ def test(test_loader, model_net, criterion, epoch, args, device, multiple, postf
 
                 if (testIndex % (multiple - 1)) == 0:
                     save_input_frames = frames[:, :, :-1, :, :]
-                    cv2.imwrite(scene_save_path + '/' + I0_Path[0],
+                    cv2.imwrite(os.path.join(scene_save_path, I0_Path[0]),
                                 np.transpose(np.squeeze(denorm255_np(save_input_frames[:, :, 0, :, :].detach().numpy())),
                                              [1, 2, 0]).astype(np.uint8))
-                    cv2.imwrite(scene_save_path + '/' + I1_Path[0],
+                    cv2.imwrite(os.path.join(scene_save_path, I1_Path[0]),
                                 np.transpose(np.squeeze(denorm255_np(save_input_frames[:, :, 1, :, :].detach().numpy())),
                                              [1, 2, 0]).astype(np.uint8))
 
-                cv2.imwrite(scene_save_path + '/' + It_Path[0], output_img.astype(np.uint8))
+                cv2.imwrite(os.path.join(scene_save_path, It_Path[0]), output_img.astype(np.uint8))
 
                 # measure
                 losses.update(test_loss.item(), 1)
@@ -395,8 +401,8 @@ def test(test_loader, model_net, criterion, epoch, args, device, multiple, postf
                 scene_save_path = os.path.join(epoch_save_path, scene_name[0])
                 pred_frameT = np.squeeze(pred_frameT.detach().cpu().numpy())
                 output_img = np.around(denorm255_np(np.transpose(pred_frameT, [1, 2, 0])))  # [h,w,c] and [-1,1] to [0,255]
-                print(scene_save_path + '/' + It_Path[0])
-                cv2.imwrite(scene_save_path + '/' + It_Path[0], output_img.astype(np.uint8))
+                print(os.path.join(scene_save_path, It_Path[0]))
+                cv2.imwrite(os.path.join(scene_save_path, It_Path[0]), output_img.astype(np.uint8))
 
                 losses.update(0.0, 1)
                 PSNRs.update(0.0, 1)
