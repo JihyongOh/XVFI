@@ -4,7 +4,7 @@
 
 \[[Demo(YouTube)](https://www.youtube.com/watch?v=5qAiffYFJh8)\]
 
-Last Update: 20210806
+Last Update: 20210812
 
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
 If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
