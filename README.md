@@ -254,7 +254,9 @@ python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_fact
 
 
 ## Contact
-If you have any question, please send an email to either flhy5836@kaist.ac.kr or jhoh94@kaist.ac.kr.
+If you have any question, please send an email to either \
+[[Hyeonjun Sim](https://sites.google.com/view/hjsim)] - flhy5836@kaist.ac.kr or \
+[[Jihyong Oh](https://sites.google.com/view/ozbro)] - jhoh94@kaist.ac.kr.
 
 ## License
 The source codes and datasets can be freely used for research and education only. Any commercial use should get formal permission first.
