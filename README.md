@@ -1,13 +1,13 @@
 # XVFI (accepted in ICCV2021, Oral) 	[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/xvfi-extreme-video-frame-interpolation/video-frame-interpolation-on-x4k1000fps)](https://paperswithcode.com/sota/video-frame-interpolation-on-x4k1000fps?p=xvfi-extreme-video-frame-interpolation) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/xvfi-extreme-video-frame-interpolation/video-frame-interpolation-on-vimeo90k)](https://paperswithcode.com/sota/video-frame-interpolation-on-vimeo90k?p=xvfi-extreme-video-frame-interpolation)
 
-**This is the official repository of XVFI (eXtreme Video Frame Interpolation), https://arxiv.org/abs/2103.16206**
+**This is the official repository of XVFI (eXtreme Video Frame Interpolation)**
 
-\[[Demo(YouTube)](https://www.youtube.com/watch?v=5qAiffYFJh8)\]
+\[[ArXiv_ver.](https://arxiv.org/abs/2103.16206)\] \[[ICCV2021_ver.](https://openaccess.thecvf.com/content/ICCV2021/papers/Sim_XVFI_eXtreme_Video_Frame_Interpolation_ICCV_2021_paper.pdf)\] \[[Supp.](https://openaccess.thecvf.com/content/ICCV2021/supplemental/Sim_XVFI_eXtreme_Video_ICCV_2021_supplemental.pdf)\] \[[Demo(YouTube)](https://www.youtube.com/watch?v=5qAiffYFJh8)\]
 
-Last Update: 20210812
+Last Update: 20211007
 
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
-If you find this repository useful, please consider citing our [paper](https://arxiv.org/abs/2103.16206).
+If you find this repository useful, please consider citing our [paper](https://openaccess.thecvf.com/content/ICCV2021/papers/Sim_XVFI_eXtreme_Video_Frame_Interpolation_ICCV_2021_paper.pdf).
 
 ### Examples of the VFI (x8 Multi-Frame Interpolation) results on X-TEST
 ![results_045_resized](/figures/results_045_resized_768.gif "results_045_resized")
@@ -239,7 +239,7 @@ python main.py --phase 'train' --exp_num 1 --dataset 'Vimeo' --module_scale_fact
 
 <!-- **Reference**:   -->
 ## Reference
-> Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", https://arxiv.org/abs/2103.16206, 2021. (* *equal contribution*)
+> Hyeonjun Sim*, Jihyong Oh*, and Munchurl Kim "XVFI: eXtreme Video Frame Interpolation", In _ICCV_, 2021. (* *equal contribution*)
 > 
 **BibTeX**
 ```bibtex
