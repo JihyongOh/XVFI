@@ -8,7 +8,7 @@
 
 
 
-Last Update: 20211016
+Last Update: 20211130 - We provide extended input sequences for X-TEST. Please refer to [X4K1000FPS](#X4K1000FPS)
 
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
 If you find this repository useful, please consider citing our [paper](https://openaccess.thecvf.com/content/ICCV2021/papers/Sim_XVFI_eXtreme_Video_Frame_Interpolation_ICCV_2021_paper.pdf).
@@ -54,6 +54,10 @@ We provide our X4K1000FPS dataset which consists of X-TEST and X-TRAIN. Please r
           ├──── ...
        ├──── ...
 ```
+`Extended version of X-TEST` [issue#9](https://github.com/JihyongOh/XVFI/issues/9).
+As described in our paper, we assume that the number of input frames for VFI is fixed to 2 in X-TEST. However, for the VFI methods that require more than 2 input frames, we provide an **extended version of X-TEST** which contains **8 input frames** (in a temporal distance of 32 frames) for each test seqeuence. The middle two adjacent frames among the 8 frames are the same input frames in the original X-TEST. To sort .png files properly by their file names, we added 1000 to the frame indices (e.g. '0000.png' and '0032.png' in the original version of X-TEST correspond to '1000.png' and '1032.png', respectively, in the extended version of X-TEST). Please note that the extended one consists of input frames only, without the ground truth intermediate frames ('1001.png'~'1031.png'). In addition, for the sequence 'TEST11_078_f4977', '1064.png', '1096.png' and '1128.png' are replicated frames since '1064.png' is the last frame of the raw video file.
+The **extended version of X-TEST** can be downloaded from the [link](https://www.dropbox.com/s/tjmxauo05axoi5v/png_test_8_input_frames.zip?dl=0).
+
 
 `X-TRAIN` consists of 4,408 clips from various types of 110 scenes. The clips are 65-length of 1000fps frames. Each frame is the size of 768x768 cropped from 4K frame. It follows the below directory format:
 ```
