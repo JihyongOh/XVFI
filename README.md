@@ -1,5 +1,12 @@
 # XVFI (ICCV2021, Oral) 	[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/xvfi-extreme-video-frame-interpolation/video-frame-interpolation-on-x4k1000fps)](https://paperswithcode.com/sota/video-frame-interpolation-on-x4k1000fps?p=xvfi-extreme-video-frame-interpolation) [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/xvfi-extreme-video-frame-interpolation/video-frame-interpolation-on-vimeo90k)](https://paperswithcode.com/sota/video-frame-interpolation-on-vimeo90k?p=xvfi-extreme-video-frame-interpolation)
 
+
+[![ArXiv](https://img.shields.io/badge/ArXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2103.16206)
+[![ICCV2021](https://img.shields.io/badge/ICCV2021-Paper-<COLOR>.svg)](https://openaccess.thecvf.com/content/ICCV2021/papers/Sim_XVFI_eXtreme_Video_Frame_Interpolation_ICCV_2021_paper.pdf)
+[![GitHub Stars](https://img.shields.io/github/stars/JihyongOh/XVFI?style=social)](https://github.com/JihyongOh/XVFI)
+[![Demo views](https://img.shields.io/youtube/views/5qAiffYFJh8)](https://www.youtube.com/watch?v=5qAiffYFJh8&ab_channel=VICLabKAIST)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=JihyongOh/XVFI)
+
 **This is the official repository of XVFI (eXtreme Video Frame Interpolation)**
 
 \[[ArXiv_ver.](https://arxiv.org/abs/2103.16206)\] \[[ICCV2021_ver.](https://openaccess.thecvf.com/content/ICCV2021/papers/Sim_XVFI_eXtreme_Video_Frame_Interpolation_ICCV_2021_paper.pdf)\] \[[Supp.](https://openaccess.thecvf.com/content/ICCV2021/supplemental/Sim_XVFI_eXtreme_Video_ICCV_2021_supplemental.pdf)\] \[[Demo(YouTube)](https://www.youtube.com/watch?v=5qAiffYFJh8)\] \[[Oral12mins(YouTube)](https://www.youtube.com/watch?v=igwy1TJQiRc&t=13s)\] \[[Flowframes(GUI)](https://nmkd.itch.io/flowframes)\]
