@@ -14,7 +14,6 @@
 
 
 
-
 Last Update: 20211130 - We provide extended input sequences for X-TEST. Please refer to [X4K1000FPS](#X4K1000FPS)
 
 We provide the training and test code along with the trained weights and the dataset (train+test) used for XVFI. 
